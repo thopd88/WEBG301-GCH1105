@@ -8,3 +8,9 @@
 ```php artisan make:controller BookController --resource```
 
 --------------
+
+## edit.blade.php
+```
+<form action="/books/{{$book->id}}" method="post">
+        {{ method_field('PUT') }}
+```
