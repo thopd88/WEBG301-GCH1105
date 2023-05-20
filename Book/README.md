@@ -20,7 +20,7 @@
 <form action="{{url("/books/".$book->id)}}" method="post" class="d-inline">
 {{ method_field('DELETE') }}
 @csrf
-<button type="submit" class="btn btn-danger">Delete</button>
+<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
 </form>
 ```
 
