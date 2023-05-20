@@ -1,75 +1,44 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <title>Book List</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-</head>
-
-<body>
-  <header>
-    <!-- place navbar here -->
-  </header>
-  <main>
-    <div class="table-responsive">
-        <table class="table table-striped
-        table-hover	
-        table-borderless
-        table-primary
-        align-middle">
-            <thead class="table-light">
-                <caption>Books</caption>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Action</th>
+@extends('book.layout')
+@section('title', 'Book List')
+@section('content')
+<div class="table-responsive">
+  <table class="table table-striped
+  table-hover	
+  table-borderless
+  table-primary
+  align-middle">
+      <thead class="table-light">
+          <caption>Books</caption>
+          <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Action</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+                @foreach ($books as $book)
+                <tr class="table-primary" >
+                  <td>
+                    <a href="{{url("/books/".$book->id)}}">
+                    {{$book->title}}
+                    </a>
+                  </td>
+                  <td>{{$book->author}}</td>
+                  <td>
+                    <a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>
+                    <form action="{{url("/books/".$book->id)}}" method="post" class="d-inline">
+                      {{ method_field('DELETE') }}
+                      @csrf
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                    </form>
+                  </td>
                 </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                      @foreach ($books as $book)
-                      <tr class="table-primary" >
-                        <td>
-                          <a href="{{url("/books/".$book->id)}}">
-                          {{$book->title}}
-                          </a>
-                        </td>
-                        <td>{{$book->author}}</td>
-                        <td>
-                          <a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>
-                          <form action="{{url("/books/".$book->id)}}" method="post" class="d-inline">
-                            {{ method_field('DELETE') }}
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
-                          </form>
-                        </td>
-                      </tr>
-                      @endforeach
-                </tbody>
-                <tfoot>
-                    
-                </tfoot>
-        </table>
-    </div>
-    
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
+                @endforeach
+          </tbody>
+          <tfoot>
+              
+          </tfoot>
+  </table>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
-</body>
-
-</html>
+@endsection
