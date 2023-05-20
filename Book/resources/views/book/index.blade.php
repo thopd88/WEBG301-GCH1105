@@ -29,6 +29,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -40,6 +41,14 @@
                           </a>
                         </td>
                         <td>{{$book->author}}</td>
+                        <td>
+                          <a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>
+                          <form action="{{url("/books/".$book->id)}}" method="post" class="d-inline">
+                            {{ method_field('DELETE') }}
+                            @csrf
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                          </form>
+                        </td>
                       </tr>
                       @endforeach
                 </tbody>
