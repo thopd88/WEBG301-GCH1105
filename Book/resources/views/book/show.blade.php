@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Book List</title>
+  <title>Book Detail</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,37 +18,12 @@
     <!-- place navbar here -->
   </header>
   <main>
-    <div class="table-responsive">
-        <table class="table table-striped
-        table-hover	
-        table-borderless
-        table-primary
-        align-middle">
-            <thead class="table-light">
-                <caption>Books</caption>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                      @foreach ($books as $book)
-                      <tr class="table-primary" >
-                        <td>
-                          <a href="{{url("/books/".$book->id)}}">
-                          {{$book->title}}
-                          </a>
-                        </td>
-                        <td>{{$book->author}}</td>
-                      </tr>
-                      @endforeach
-                </tbody>
-                <tfoot>
-                    
-                </tfoot>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{$book->title}}</h4>
+            <p class="card-text">{{$book->description}}</p>
+        </div>
     </div>
-    
   </main>
   <footer>
     <!-- place footer here -->

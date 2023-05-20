@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::resource('/', BookController::class);
+Route::resource('/books', BookController::class);

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Book List</title>
+  <title>Create new Book</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,37 +18,22 @@
     <!-- place navbar here -->
   </header>
   <main>
-    <div class="table-responsive">
-        <table class="table table-striped
-        table-hover	
-        table-borderless
-        table-primary
-        align-middle">
-            <thead class="table-light">
-                <caption>Books</caption>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                      @foreach ($books as $book)
-                      <tr class="table-primary" >
-                        <td>
-                          <a href="{{url("/books/".$book->id)}}">
-                          {{$book->title}}
-                          </a>
-                        </td>
-                        <td>{{$book->author}}</td>
-                      </tr>
-                      @endforeach
-                </tbody>
-                <tfoot>
-                    
-                </tfoot>
-        </table>
-    </div>
-    
+    <form action="/books" method="post">
+        @csrf
+        <div class="mb-3">
+            <label for="title" class="form-label">Book Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Book Title">
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Book Author</label>
+            <input type="text" class="form-control" id="author" name="author" placeholder="Book Author">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Book Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </main>
   <footer>
     <!-- place footer here -->
