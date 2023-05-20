@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Book;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::resource('/', Book::class);
+Route::resource('/', BookController::class);
