@@ -14,3 +14,7 @@
 <form action="/books/{{$book->id}}" method="post">
         {{ method_field('PUT') }}
 ```
+## index.blade.php
+```
+<a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>
+```
