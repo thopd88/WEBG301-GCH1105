@@ -7,9 +7,6 @@ use \App\Models\Book;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $books = Book::all();
