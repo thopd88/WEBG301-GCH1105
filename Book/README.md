@@ -44,3 +44,24 @@ public function books()
     return $this->hasMany(Book::class);
 }
 ```
+
+## Controller (BookController.php)
+```
+public function create()
+{
+    $authors = Author::all();
+    return view('books.create', compact('authors'));
+}
+```
+
+## create.blade.php
+```
+<div class="form-group">
+    <label for="author_id">Author</label>
+    <select name="author_id" id="author_id" class="form-control">
+        @foreach($authors as $author)
+        <option value="{{$author->id}}">{{$author->name}}</option>
+        @endforeach
+    </select>
+</div>
+```
