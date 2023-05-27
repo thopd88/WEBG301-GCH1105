@@ -54,6 +54,22 @@ public function create()
 }
 ```
 
+```
+public function store(Request $request)
+{
+    $book = new Book();
+
+    $book->title = $request->title;
+    $book->author_id = $request->author;
+    $book->description = $request->description;
+
+    $book->save();
+
+    return redirect('/books');
+}
+```
+
+
 ## create.blade.php
 ```
 <div class="form-group">
