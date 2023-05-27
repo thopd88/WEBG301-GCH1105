@@ -24,3 +24,23 @@
 </form>
 ```
 
+-------
+# Connect Books and Authors
+## Migration (books table)
+```
+$table->foreignId('author_id')->constrained()->onDelete('cascade');
+```
+## Model (Book.php)
+```
+public function author()
+{
+    return $this->belongsTo(Author::class);
+}
+```
+## Model (Author.php)
+```
+public function books()
+{
+    return $this->hasMany(Book::class);
+}
+```
