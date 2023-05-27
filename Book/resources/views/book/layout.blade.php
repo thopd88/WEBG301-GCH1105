@@ -15,24 +15,17 @@
 
 <body>
   <header>
-    <ul class="nav justify-content-center  ">
-        <li class="nav-item">
-            <a class="nav-link active" href="#" aria-current="page">Active link 123</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled link</a>
-        </li>
-    </ul>
+    @include('book.navbar')
   </header>
   <main>
-    @yield('content')
+    <div class="container">
+      <h1>@yield('title')</h1>
+      @yield('content')
+    </div>
     
   </main>
-  <footer>
-    <!-- place footer here -->
+  <footer class="footer mt-auto py-3">
+    @include('book.footer')
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
