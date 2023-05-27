@@ -60,7 +60,7 @@ public function store(Request $request)
     $book = new Book();
 
     $book->title = $request->title;
-    $book->author_id = $request->author;
+    $book->author_id = $request->author_id;
     $book->description = $request->description;
 
     $book->save();
