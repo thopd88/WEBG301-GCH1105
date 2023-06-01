@@ -1,4 +1,4 @@
-@extends('book.layout')
+@extends('layout.layout')
 @section('title', 'New Book')
 @section('content')
 <form action="/books" method="post">
@@ -9,7 +9,12 @@
     </div>
     <div class="mb-3">
         <label for="author" class="form-label">Book Author</label>
-        <input type="text" class="form-control" id="author" name="author" placeholder="Book Author">
+        <select id="author" name="author" class="form-select" aria-label="Select Author">
+            <option selected>Please choose one</option>
+            @foreach($authors as $author)
+            <option value="{{$author->id}}">{{$author->name}}</option>
+            @endforeach
+        </select>
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Book Description</label>

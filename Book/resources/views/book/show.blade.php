@@ -1,4 +1,4 @@
-@extends('book.layout')
+@extends('layout.layout')
 @section('title', 'Book List')
 @section('content')
     <div class="card">

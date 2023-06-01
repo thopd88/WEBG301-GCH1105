@@ -1,28 +1,28 @@
 @extends('layout.layout')
-@section('title', 'Book List')
+@section('title', 'Author List')
 @section('content')
 <div class="table-responsive">
   <table class="table table-striped table-hover">
       <thead class="table-light">
           <tr>
-              <th>Title</th>
-              <th>Author</th>
+              <th>Name</th>
+              <th>Email</th>
               <th>Action</th>
           </tr>
           </thead>
           <tbody class="table-group-divider">
-                @foreach ($books as $book)
+                @foreach ($authors as $author)
                 <tr class="table-primary" >
                   <td>
-                    <a href="{{url("/books/".$book->id)}}">
-                    {{$book->title}}
+                    <a href="{{url("/authors/".$author->id)}}">
+                    {{$author->name}}
                     </a>
                   </td>
-                  <td>{{$book->author->name}}</td>
+                  <td>{{$author->email}}</td>
                   <td>
-                    <a href="{{url("/books/".$book->id)}}" class="btn btn-primary">View</a>
-                    <a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>
-                    <form action="{{url("/books/".$book->id)}}" method="post" class="d-inline">
+                    <a href="{{url("/authors/".$author->id)}}" class="btn btn-primary">View</a>
+                    <a href="{{url("/authors/".$author->id."/edit")}}" class="btn btn-warning">Edit</a>
+                    <form action="{{url("/authors/".$author->id)}}" method="post" class="d-inline">
                       {{ method_field('DELETE') }}
                       @csrf
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>

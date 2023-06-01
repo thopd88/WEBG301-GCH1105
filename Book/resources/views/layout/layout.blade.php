@@ -15,7 +15,7 @@
 
 <body>
   <header>
-    @include('book.navbar')
+    @include('layout.navbar')
   </header>
   <main>
     <div class="container">
@@ -25,7 +25,7 @@
     
   </main>
   <footer class="footer mt-auto py-3">
-    @include('book.footer')
+    @include('layout.footer')
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
