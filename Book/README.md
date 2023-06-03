@@ -81,3 +81,88 @@ public function store(Request $request)
     </select>
 </div>
 ```
+
+# Add Tags
+## Create Model and Migration
+```php artisan make:model Tag -m```
+
+## Migration (tags table)
+```
+$table->string('name');
+```
+
+## Model (Tag.php)
+```
+public function books()
+{
+    return $this->belongsToMany(Book::class);
+}
+```
+
+## Model (Book.php)
+```
+public function tags()
+{
+    return $this->belongsToMany(Tag::class);
+}
+```
+
+## Migration (book_tag table)
+```
+$table->foreignId('book_id')->constrained()->onDelete('cascade');
+$table->foreignId('tag_id')->constrained()->onDelete('cascade');
+```
+
+## Controller (BookController.php)
+```
+public function create()
+{
+    $authors = Author::all();
+    $tags = Tag::all();
+    return view('books.create', compact('authors', 'tags'));
+}
+```
+
+```
+public function store(Request $request)
+{
+    $book = new Book();
+
+    $book->title = $request->title;
+    $book->author_id = $request->author_id;
+    $book->description = $request->description;
+
+    $book->save();
+
+    $book->tags()->attach($request->tags);
+
+    return redirect('/books');
+}
+```
+
+```
+public function edit($id)
+{
+    $book = Book::find($id);
+    $authors = Author::all();
+    $tags = Tag::all();
+    return view('books.edit', compact('book', 'authors', 'tags'));
+}
+```
+
+```
+public function update(Request $request, $id)
+{
+    $book = Book::find($id);
+
+    $book->title = $request->title;
+    $book->author_id = $request->author_id;
+    $book->description = $request->description;
+
+    $book->save();
+
+    $book->tags()->sync($request->tags);
+
+    return redirect('/books');
+}
+```
