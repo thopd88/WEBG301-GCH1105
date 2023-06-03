@@ -166,3 +166,27 @@ public function update(Request $request, $id)
     return redirect('/books');
 }
 ```
+
+## create.blade.php (book)
+```
+<div class="form-group">
+    <label for="tags">Tags</label>
+    <select name="tags[]" id="tags" class="form-control" multiple>
+        @foreach($tags as $tag)
+        <option value="{{$tag->id}}">{{$tag->name}}</option>
+        @endforeach
+    </select>
+</div>
+```
+
+## edit.blade.php (book)
+```
+<div class="form-group">
+    <label for="tags">Tags</label>
+    <select name="tags[]" id="tags" class="form-control" multiple>
+        @foreach($tags as $tag)
+        <option value="{{$tag->id}}" @if($book->tags->contains($tag->id)) selected @endif>{{$tag->name}}</option>
+        @endforeach
+    </select>
+</div>
+```
