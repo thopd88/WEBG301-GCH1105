@@ -19,6 +19,15 @@
         </select>
     </div>
     <div class="mb-3">
+        <label for="category" class="form-label">Book Category</label>
+        <select id="category" name="category" class="form-select" aria-label="Select Category">
+            <option>Please choose one</option>
+            @foreach($categories as $category)
+            <option {{ ($category->id == $book->category->id)?"selected":""}} value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="description" class="form-label">Book Description</label>
         <textarea class="form-control" id="description" name="description" rows="3">{{$book->description}}</textarea>
     </div>

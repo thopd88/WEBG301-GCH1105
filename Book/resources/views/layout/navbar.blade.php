@@ -19,6 +19,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/authors/create">New Author <span class="visually-hidden"></span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories">Category List<span class="visually-hidden"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories/create">New Category <span class="visually-hidden"></span></a>
+                </li>
             </ul>
         </div>
   </div>

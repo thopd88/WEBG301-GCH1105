@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Book;
 use \App\Models\Author;
+use App\Models\Category;
 
 class BookController extends Controller
 {
@@ -23,8 +24,10 @@ class BookController extends Controller
     public function create()
     {
         $authors = Author::all();
+        $categories = Category::all();
         return view('book.create',[
             'authors' => $authors,
+            'categories' => $categories,
         ]);
     }
 
@@ -37,6 +40,7 @@ class BookController extends Controller
 
         $book->title = $request->title;
         $book->author_id = $request->author;
+        $book->category_id = $request->category;
         $book->description = $request->description;
 
         $book->save();
@@ -63,10 +67,12 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $authors = Author::all();
+        $categories = Category::all();
 
         return view('book.edit', [
             'book' => $book,
             'authors' => $authors,
+            'categories' => $categories,
         ]);
     }
 
@@ -79,6 +85,7 @@ class BookController extends Controller
 
         $book->title = $request->title;
         $book->author_id = $request->author;
+        $book->category_id = $request->category;
         $book->description = $request->description;
 
         $book->save();
