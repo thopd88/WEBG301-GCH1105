@@ -190,3 +190,146 @@ public function update(Request $request, $id)
     </select>
 </div>
 ```
+
+## login.blade.php
+```
+<form action="/login" method="post">
+    @csrf
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter email" required>
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+    </div>
+    @error('message')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+@endsection
+```
+
+## register.blade.php
+```
+<form action="/register" method="post">
+    @csrf
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter email" required>
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+    </div>
+    <div class="form-group">
+        <label for="pwd">Confirm Password:</label>
+        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Enter password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+```
+
+## web.php
+```
+Route::get('/login', AuthenticationController::class . '@loginIndex');
+Route::get('/register', AuthenticationController::class . '@registerIndex');
+Route::post('/login', AuthenticationController::class . '@login');
+Route::post('/register', AuthenticationController::class . '@register');
+Route::get('/logout', AuthenticationController::class . '@logout');
+```
+
+## AuthenticationController.php
+```
+public function loginIndex()
+{
+    return view('login');
+}
+```
+
+```
+public function registerIndex()
+{
+    return view('register');
+}
+```
+
+```
+public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+
+        return redirect()->intended('/books');
+    }
+
+    return back()->withErrors([
+        'message' => 'The provided credentials do not match our records.',
+    ]);
+}
+```
+
+```
+public function register(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|confirmed',
+    ]);
+
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    Auth::login($user);
+
+    return redirect('/books');
+}
+```
+
+```
+public function logout()
+{
+    Auth::logout();
+
+    return redirect('/login');
+}
+```
+
+## navbar.blade.php
+```
+<ul class="navbar-nav ml-auto">
+@if (Auth::check())
+    <li class="nav-item">
+        <a class="nav-link" href="#">{{ Auth::user()->name }} <span class="visually-hidden"></span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout <span class="visually-hidden"></span></a>
+    </li>
+@else
+    <li class="nav-item">
+        <a class="nav-link" href="/login">Login <span class="visually-hidden"></span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/register">Register <span class="visually-hidden"></span></a>
+    </li>
+@endif
+</ul>
+
+## Authentication for Book List
+# BookController.php
+```
+if(!Auth::check()) {
+    return redirect('/login');
+}
+```
