@@ -26,6 +26,14 @@
         </select>
     </div>
     <div class="mb-3">
+        <label for="tags" class="form-label">Book Tags</label>
+        <select id="tags" name="tags[]" class="form-select" aria-label="Select Tags" multiple>            
+            @foreach($tags as $tag)
+            <option value="{{$tag->id}}">{{$tag->name}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="description" class="form-label">Book Description</label>
         <textarea class="form-control" id="description" name="description" rows="3"></textarea>
     </div>

@@ -7,6 +7,8 @@
           <tr>
               <th>Title</th>
               <th>Author</th>
+              <th>Category</th>
+              <th>Tags</th>
               <th>Action</th>
           </tr>
           </thead>
@@ -19,6 +21,11 @@
                     </a>
                   </td>
                   <td>{{$book->author->name}}</td>
+                  <td>{{$book->category->name}}</td>
+                  <td>
+                    @foreach($book->tags as $tag)
+                      <span class="badge badge-info">{{$tag->name}}</span>
+                    @endforeach
                   <td>
                     <a href="{{url("/books/".$book->id)}}" class="btn btn-primary">View</a>
                     <a href="{{url("/books/".$book->id."/edit")}}" class="btn btn-warning">Edit</a>

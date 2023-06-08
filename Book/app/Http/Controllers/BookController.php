@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Book;
 use \App\Models\Author;
 use App\Models\Category;
+use App\Models\Tag;
 
 class BookController extends Controller
 {
@@ -25,9 +26,11 @@ class BookController extends Controller
     {
         $authors = Author::all();
         $categories = Category::all();
+        $tags = Tag::all();
         return view('book.create',[
             'authors' => $authors,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -44,6 +47,7 @@ class BookController extends Controller
         $book->description = $request->description;
 
         $book->save();
+        $book->tags()->attach($request->tags);
 
         return redirect('/books');
     }
@@ -68,11 +72,13 @@ class BookController extends Controller
         $book = Book::find($id);
         $authors = Author::all();
         $categories = Category::all();
+        $tags = Tag::all();
 
         return view('book.edit', [
             'book' => $book,
             'authors' => $authors,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -86,6 +92,7 @@ class BookController extends Controller
         $book->title = $request->title;
         $book->author_id = $request->author;
         $book->category_id = $request->category;
+        $book->tags()->sync($request->tags);
         $book->description = $request->description;
 
         $book->save();
