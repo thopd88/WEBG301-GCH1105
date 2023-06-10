@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -23,3 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/books', BookController::class);
 Route::resource('/authors', AuthorController::class);
 Route::resource('/categories', CategoryController::class);
+Route::get('/login', AuthenticationController::class . '@loginIndex');
+Route::get('/register', AuthenticationController::class . '@registerIndex');
+Route::post('/login', AuthenticationController::class . '@login');
+Route::post('/register', AuthenticationController::class . '@register');
+Route::get('/logout', AuthenticationController::class . '@logout');

@@ -26,6 +26,23 @@
                     <a class="nav-link" href="/categories/create">New Category <span class="visually-hidden"></span></a>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (Auth::check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ Auth::user()->name }} <span class="visually-hidden"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout <span class="visually-hidden"></span></a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login <span class="visually-hidden"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register <span class="visually-hidden"></span></a>
+                    </li>
+                @endif
+            </ul>
         </div>
   </div>
 </nav>
