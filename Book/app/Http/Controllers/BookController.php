@@ -7,11 +7,16 @@ use \App\Models\Book;
 use \App\Models\Author;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function index()
     {
+        if(!Auth::check()) {
+            return redirect('/login');
+        }
+
         $books = Book::all();
 
         return view('book.index', [
