@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::resource('/books', BookController::class);
-Route::resource('/authors', AuthorController::class);
-Route::resource('/categories', CategoryController::class);
-Route::get('/login', AuthenticationController::class . '@loginIndex');
+Route::resource('/books', BookController::class)->middleware('auth');
+Route::resource('/authors', AuthorController::class)->middleware('auth');
+Route::resource('/categories', CategoryController::class)->middleware('auth');
+Route::get('/login', AuthenticationController::class . '@loginIndex')->name('login');
 Route::get('/register', AuthenticationController::class . '@registerIndex');
 Route::post('/login', AuthenticationController::class . '@login');
 Route::post('/register', AuthenticationController::class . '@register');

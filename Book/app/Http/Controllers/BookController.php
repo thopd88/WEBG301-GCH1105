@@ -13,9 +13,6 @@ class BookController extends Controller
 {
     public function index()
     {
-        if(!Auth::check()) {
-            return redirect('/login');
-        }
 
         $books = Book::all();
 
