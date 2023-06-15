@@ -6,6 +6,7 @@
       <thead class="table-light">
           <tr>
               <th>Name</th>
+              <th>Photo</th>
               <th>Email</th>
               <th>Action</th>
           </tr>
@@ -17,6 +18,9 @@
                     <a href="{{url("/authors/".$author->id)}}">
                     {{$author->name}}
                     </a>
+                  </td>
+                  <td>
+                    <img src="{{url("/upload/".$author->photo)}}" class="img-fluid rounded-top" alt="">
                   </td>
                   <td>{{$author->email}}</td>
                   <td>

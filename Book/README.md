@@ -333,3 +333,13 @@ if(!Auth::check()) {
     return redirect('/login');
 }
 ```
+
+## Upload images
+```
+  $photo = $request->file('photo')->store('public');
+  $author->photo = substr($photo,strlen('public/'));
+```
+
+```
+php artisan storage:link
+```

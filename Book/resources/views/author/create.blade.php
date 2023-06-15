@@ -1,11 +1,15 @@
 @extends('layout.layout')
 @section('title', 'New Author')
 @section('content')
-<form action="/authors" method="post">
+<form action="/authors" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Author Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Author Name">
+    </div>
+    <div class="mb-3">
+        <label for="photo" class="form-label">Author Photo</label>
+        <input type="file" class="form-control" id="photo" name="photo" placeholder="Author Photo">
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Author Email</label>

@@ -38,6 +38,11 @@ class AuthorController extends Controller
         $author->email = $request->email;
         $author->phone = $request->phone;
         $author->biodata = $request->biodata;
+        $photo = $request->file('photo')->store('public');
+        $author->photo = substr($photo,strlen('public/'));
+
+
+        // http://127.0.0.1:8000/upload/z4QI9El9zF9jCv3Su9V1xfPn5NXtpqRfYLaTK8NF.png
 
         $author->save();
 
