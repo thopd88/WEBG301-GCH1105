@@ -11,6 +11,8 @@
                     {{$tag->name}};
                 @endforeach
             </h6>
+            {{-- Button to borrow current book --}}
+            <a href="{{url("/books/".$book->id."/borrow")}}" class="btn btn-primary">Borrow this book</a>
             <p class="card-text">{{$book->description}}</p>
         </div>
     </div>

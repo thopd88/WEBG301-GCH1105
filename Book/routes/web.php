@@ -22,6 +22,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('/books', BookController::class)->middleware('auth');
+
+// Route for borrowing books
+Route::get('/books/{id}/borrow', BookController::class . '@borrow')->middleware('auth');
+
+// Route for get all books that user has borrowed
+Route::get('/borrowed', BookController::class . '@borrowed')->middleware('auth');
+
 Route::resource('/authors', AuthorController::class)->middleware('auth');
 Route::resource('/categories', CategoryController::class)->middleware('auth');
 Route::get('/login', AuthenticationController::class . '@loginIndex')->name('login');

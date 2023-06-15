@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Book;
 use \App\Models\Author;
+use App\Models\Borrow;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -112,5 +113,34 @@ class BookController extends Controller
         $book->delete();
 
         return redirect('/books');
+    }
+
+    public function borrow(string $id)
+    {
+        $book = Book::find($id);
+        $book->count = $book->count - 1;
+        $book->save();
+
+        $user = Auth::user();
+        $borrow = new Borrow();
+
+        $borrow->user_id = $user->id;
+        $borrow->book_id = $book->id;
+        $borrow->borrow_date = date('Y-m-d');
+        $borrow->status = 'borrowed';
+
+        $borrow->save();
+
+        return redirect('/books');
+    }
+
+    public function borrowed()
+    {
+        $user = Auth::user();
+        $borrows = Borrow::where('user_id', $user->id)
+        ->where('status', 'borrowed')
+        ->get();
+
+        return $borrows;
     }
 }
